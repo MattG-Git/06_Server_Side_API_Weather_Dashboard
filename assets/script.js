@@ -7,6 +7,7 @@ var srchBtnEl = $("button");
 var rightNow = moment().format('MMM DD, YYYY');
 var latitude = 0;
 var longitude = 0;
+var date = 0;
 
 
 //fetch(currentUrl);
@@ -26,7 +27,7 @@ function fetchLatLong(){
 };
 
 function fetchCurrentWeather(latitude, longitude) {
-       console.log(latitude, longitude)
+    console.log(latitude, longitude)
     fetch("http://api.openweathermap.org/data/3.0/onecall?lat=" + latitude + "&lon=" + longitude + "&appid=" + apiKey) 
     // the following code converts to json
     .then(function(resp) { return resp.json() }) 
@@ -40,12 +41,14 @@ function fetchCurrentWeather(latitude, longitude) {
   };
 
   function fetchForecast() {
+    console.log(city);
     fetch("http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey)
     // the following code converts to json
     .then(function(resp) { return resp.json() }) 
     .then(function(data) {
-    dailyWeather(data);
     console.log(data);
+    dailyWeather(data);
+
     })
     .catch(function() {
       // catch any errors
@@ -77,32 +80,53 @@ function currentWeather(d) {
     );
 };
 
-function dailyWeather(d) {
-    var dailyOne = moment().add(1,"d");
-    //var dailyIconCode = d.list.weather[0].icon;
-    //var dailyIconUrl = "http://openweathermap.org/img/wn/" + dailyIconCode + ".png"
-    //var dailyWeatherIcon = $("<img>").attr("src",dailyIconUrl);
-    var dailyFar = Math.round(((parseFloat(d.list[0].main.temp)-273.15)*1.8)+32);
-    var dailyTempF = $("<p>").text(`Temp: ${dailyFar} F`);
-    var dailyWind = $("<p>").text(`wind: ${d.list[0].wind.speed}`);
-    var dailyhumid = $("<p>").text(`Humidity: ${d.list[0].main.humidity} %`)
 
-        daily1El.append(
-            dailyOne,
-            //dailyWeatherIcon,
-            dailyTempF,
-            dailyWind,
-            dailyhumid
-        );
+function dailyWeather(d) {
+    $("#daily1").empty();
+    console.log(d)
+    for (let i =0; i < d.list.length; i = i + 8){
+        console.log(i,d.list[i])
+        date++;
+        var dailyOne = moment().add(date, 'd');
+        var dailyIconCode = d.list[i].weather[0].icon;
+        var dailyIconUrl = "http://openweathermap.org/img/wn/" + dailyIconCode + ".png"
+        var dailyWeatherIcon = $("<img>").attr("src",dailyIconUrl);
+        var dailyFar = Math.round(((parseFloat(d.list[i].main.temp)-273.15)*1.8)+32);
+        var dailyTempF = $("<p>").text(`Temp: ${dailyFar} F`);
+        var dailyWind = $("<p>").text(`wind: ${d.list[i].wind.speed}`);
+        var dailyhumid = $("<p>").text(`Humidity: ${d.list[i].main.humidity} %`)
+        var cardForecast = $("<div>")
+
+        
+            cardForecast.append(
+                dailyOne,
+                dailyWeatherIcon,
+                dailyTempF,
+                dailyWind,
+                dailyhumid
+            );
+
+            $("#daily1").append(
+                `<div class="card" style="width: 18rem;">
+                <h5 class="card-title">${dailyOne}</h5>
+                <img src="${dailyIconUrl}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">Temp: ${dailyFar} F</p>
+                    <p>wind: ${d.list[i].wind.speed}</p>
+                    <p>Humidity: ${d.list[i].main.humidity} %</p>
+                </div>
+              </div>`
+            )
+    }
+
 };
 
 function userSearch() {
     var cityInput = searchBarEl.val().trim();
     city = cityInput;
     fetchLatLong();
-    currentWeather();
+    fetchCurrentWeather();
     fetchForecast();
-    dailyWeather();
 };
 
 srchBtnEl.on("click", userSearch);
