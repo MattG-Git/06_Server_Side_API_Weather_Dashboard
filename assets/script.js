@@ -36,7 +36,7 @@ function fetchCurrentWeather(latitude, longitude) {
     console.log(data);
     })
     .catch(function() {
-      // catch any errors
+    // catch any errors
     });
   };
 
@@ -55,7 +55,7 @@ function fetchCurrentWeather(latitude, longitude) {
     });
   };
  
-
+//this function displays the current weather information
 function currentWeather(d) {
     $("#current").empty();
     var currentHeader = $("<h2>").text(city);
@@ -68,7 +68,16 @@ function currentWeather(d) {
     var windSpd = $("<p>").text(`Wind: ${d.current.wind_speed}`);
     var humidCurrent = $("<p>").text(`Humidity: ${d.current.humidity} %`);
     var uvCurrent = $("<p>").text(`UV Index: ${d.current.uvi}`);
+    var uv = parseFloat(d.current.uvi);
+    console.log(uv);
     //console.log(tempF);
+
+    //this makes the background on the UV index change colors depending on if it's above 6 or not
+    if (uv < 6) {
+        uvCurrent.css("background-color", "green");
+    } else {
+        uvCurrent.css("background-color", "red"); 
+    }; 
 
     currentEl.append(
         currentHeader,
@@ -79,9 +88,9 @@ function currentWeather(d) {
         humidCurrent,
         uvCurrent
     );  
-};
+}; 
 
-
+//this function displays the 5 day weather forecast information
 function dailyWeather(d) {
     $("#daily1").empty();
     console.log(d)
@@ -106,7 +115,7 @@ function dailyWeather(d) {
             dailyWind,
             dailyhumid
         );
-
+        //this utilizes bootstrap's cards to inline style the 5 day forecast
         $("#daily1").append(
             `<div class="card" style="width: 9rem;">
             <h5 class="card-title">${dailyOne}</h5>
