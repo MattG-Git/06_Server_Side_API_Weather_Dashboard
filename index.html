@@ -21,17 +21,28 @@
     <header>
         <h1>Weather Dashboard</h1>
     </header>
-    <main>
-        <h3>Search for City:</h3>
-        <input placeholder="Type City Here" id="searchBar">
-        <button type="button" class="btn btn-primary" id="button">Search</button>
-
-        <div id="current">
-            <!--This is where the current weather will populate-->
-        </div>
-        <div class="container">
-            <div class="row"id="daily1">
-            <!--This is where the daily weather forecast will populate-->
+    <main class="container">
+        <div class="row">
+            <div class="col-4">
+                <h3>Search for City:</h3>
+                <input placeholder="Type City Here" id="searchBar">
+                <button type="button" class="btn btn-primary m-3" id="button">Search</button>
+                <ul>
+                    <span id="searchHistory">
+                    <!--this is where the local storage will display-->
+                    </span>
+                </ul>
+            </div>
+            
+            <div class="col-8">
+                <div id="current">
+                    <!--This is where the current weather will populate-->
+                </div>
+                <div class="container">
+                    <div class="row"id="daily1">
+                    <!--This is where the daily weather forecast will populate-->
+                    </div>
+                </div>
             </div>
         </div>
 
