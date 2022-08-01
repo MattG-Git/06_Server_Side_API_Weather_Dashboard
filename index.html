@@ -6,12 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
 
+    <!-- this links to bootstrap for styling-->
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
     <!--this links the css file -->
     <link rel="stylesheet" href="./assets/style.css"></link>
-
-    <!-- this links to bootstrap for styling-->
-    <link rel="stylesheet" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"></link>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
 <body>
@@ -21,13 +24,13 @@
     <main>
         <h3>Search for City:</h3>
         <input placeholder="Type City Here" id="searchBar">
-        <button id="button">Search</button>
+        <button type="button" class="btn btn-primary" id="button">Search</button>
 
         <div id="current">
             <!--This is where the current weather will populate-->
         </div>
-        <div class="row">
-            <div class="col-12"id="daily1">
+        <div class="container">
+            <div class="row"id="daily1">
             <!--This is where the daily weather forecast will populate-->
             </div>
         </div>

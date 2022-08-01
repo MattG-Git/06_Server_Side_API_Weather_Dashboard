@@ -57,6 +57,7 @@ function fetchCurrentWeather(latitude, longitude) {
  
 
 function currentWeather(d) {
+    $("#current").empty();
     var currentHeader = $("<h2>").text(city);
     var date = $("<h2>").text(rightNow);
     var iconCode = d.current.weather[0].icon;
@@ -77,7 +78,7 @@ function currentWeather(d) {
         windSpd,
         humidCurrent,
         uvCurrent
-    );
+    );  
 };
 
 
@@ -98,27 +99,27 @@ function dailyWeather(d) {
         var cardForecast = $("<div>")
 
         
-            cardForecast.append(
-                dailyOne,
-                dailyWeatherIcon,
-                dailyTempF,
-                dailyWind,
-                dailyhumid
-            );
+        cardForecast.append(
+            dailyOne,
+            dailyWeatherIcon,
+            dailyTempF,
+            dailyWind,
+            dailyhumid
+        );
 
-            $("#daily1").append(
-                `<div class="card" style="width: 18rem;">
-                <h5 class="card-title">${dailyOne}</h5>
-                <img src="${dailyIconUrl}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-text">Temp: ${dailyFar} F</p>
-                    <p>wind: ${d.list[i].wind.speed}</p>
-                    <p>Humidity: ${d.list[i].main.humidity} %</p>
-                </div>
-              </div>`
-            )
+        $("#daily1").append(
+            `<div class="card" style="width: 9rem;">
+            <h5 class="card-title">${dailyOne}</h5>
+                
+            <div class="card-body">
+                <img class="mx-auto d-block" src="${dailyIconUrl}">
+                <p class="card-text text-center">Temp: ${dailyFar} F</p>
+                <p class="text-center">wind: ${d.list[i].wind.speed}</p>
+                <p class="text-center">Humidity: ${d.list[i].main.humidity} %</p>
+            </div>
+            </div>`
+        )
     }
-
 };
 
 function userSearch() {

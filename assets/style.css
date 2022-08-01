@@ -1,0 +1,14 @@
+header {
+    color:white;
+    background-color: darkblue;
+    text-align: center;
+    margin: auto;
+};
+
+p {
+    font-size: 12px;
+};
+
+h5 {
+    font-size: 14px;
+};
