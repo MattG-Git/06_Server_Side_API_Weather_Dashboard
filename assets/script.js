@@ -121,6 +121,7 @@ function currentWeather(d) {
 function dailyWeather(d) {
     $("#daily1").empty();
     //console.log(d)
+    date = 0; 
     for (let i =0; i < d.list.length; i = i + 8){
         //console.log(i,d.list[i])
         date++;
@@ -145,14 +146,14 @@ function dailyWeather(d) {
 
         //this utilizes bootstrap's cards to inline style the 5 day forecast
         $("#daily1").append(
-            `<div class="card" style="width: 9rem;">
-                <h5 class="card-title text-center">${dailyOne}</h5>
+            `<div class="card" style="width: 9rem; background-color: #152238!important";>
+                <h5 class="card-title text-center" style=" color: white!important">${dailyOne}</h5>
                 
-            <div class="card-body">
+            <div class="card-body" style=" color: white!important">
                 <img class="mx-auto d-block" src="${dailyIconUrl}">
-                <p class="card-text text-center">Temp: ${dailyFar} F</p>
-                <p class="text-center">wind: ${d.list[i].wind.speed}</p>
-                <p class="text-center">Humidity: ${d.list[i].main.humidity} %</p>
+                <p class="card-text text-center" style=" color: white!important">Temp: ${dailyFar} F</p>
+                <p class="text-center" style=" color: white!important" >wind: ${d.list[i].wind.speed}</p>
+                <p class="text-center" style=" color: white!important" >Humidity: ${d.list[i].main.humidity} %</p>
             </div>
             </div>`
         )
@@ -176,15 +177,25 @@ function userSearch() {
     getStoredInput();
 };
 
-function performPrevious() { 
-    city = button; 
-    console.log(city)   
+function storeButton () {
+    //var listCity = $(this).text();
+    var listCity = "";
+    listCity = this.textContent; 
+    performPrevious(listCity);
+     $(".pastSearchList").off("click");
+     $(".pastSearchList").on("click", storeButton); 
+
+};
+
+function performPrevious(listCity) { 
+    city = listCity; 
+    console.log(listCity);   
     fetchLatLong();
     fetchCurrentWeather();
     fetchForecast();
     getStoredInput();
-}
+};
 
-$(".pastSearchList").on("click", performPrevious);
+$(".pastSearchList").on("click", storeButton) 
 
 srchBtnEl.on("click", userSearch);
