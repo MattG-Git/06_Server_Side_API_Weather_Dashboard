@@ -40,7 +40,7 @@ function displaySearch() {
 };
 
 function fetchLatLong(){
-    fetch("http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + apiKey)
+    fetch("https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + apiKey)
     .then(function(resp) {return resp.json() })
     .then(function(data) {
         //console.log(data);
@@ -55,7 +55,7 @@ function fetchLatLong(){
 
 function fetchCurrentWeather(latitude, longitude) {
     //console.log(latitude, longitude)
-    fetch("http://api.openweathermap.org/data/3.0/onecall?lat=" + latitude + "&lon=" + longitude + "&appid=" + apiKey) 
+    fetch("https://api.openweathermap.org/data/3.0/onecall?lat=" + latitude + "&lon=" + longitude + "&appid=" + apiKey) 
     // the following code converts to json
     .then(function(resp) { return resp.json() }) 
     .then(function(data) {
@@ -69,7 +69,7 @@ function fetchCurrentWeather(latitude, longitude) {
 
   function fetchForecast() {
     //console.log(city);
-    fetch("http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey)
+    fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey)
     // the following code converts to json
     .then(function(resp) { return resp.json() }) 
     .then(function(data) {
@@ -127,7 +127,7 @@ function dailyWeather(d) {
         date++;
         var dailyOne = moment().add(date, 'd').format("l");
         var dailyIconCode = d.list[i].weather[0].icon;
-        var dailyIconUrl = "http://openweathermap.org/img/wn/" + dailyIconCode + ".png"
+        var dailyIconUrl = "https://openweathermap.org/img/wn/" + dailyIconCode + ".png"
         var dailyWeatherIcon = $("<img>").attr("src",dailyIconUrl);
         var dailyFar = Math.round(((parseFloat(d.list[i].main.temp)-273.15)*1.8)+32);
         var dailyTempF = $("<p>").text(`Temp: ${dailyFar} F`);
