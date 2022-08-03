@@ -18,4 +18,4 @@ THEN I am again presented with current and future conditions for that city
 
 Please see [live page here](https://mattg-git.github.io/06_Server_Side_API_Weather_Dashboard/) and screenshot of project below.
 
-![Weather Dashboard](Screen_shot.png)
+![Weather Dashboard](./assets/Screen_shot.png)
